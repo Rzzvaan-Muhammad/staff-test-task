@@ -1,14 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { ProductContext, Product } from '../context/ProductContext';
 
-const SearchBar = () => {
+const SearchBar: React.FC<{ setProductList: () => void }> = ({ setProductList }) => {
   const { setProducts } = useContext(ProductContext)!;
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedTerm(searchTerm); // Update debounced term after delay
+      if (searchTerm) {
+        setDebouncedTerm(searchTerm); // Update debounced term after delay
+      } else {
+        setProductList();
+      }
     }, 500); // Delay in milliseconds (500ms here)
 
     return () => {
