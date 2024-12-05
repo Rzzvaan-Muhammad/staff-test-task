@@ -1,6 +1,5 @@
 import { useEffect, useContext } from 'react';
 import { ProductContext, Product } from '../context/ProductContext';
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -15,23 +14,50 @@ export const useProducts = () => {
     isLoading,
     error
   } = useQuery({ queryKey: ['products'], queryFn: fetchProducts });
-  const { setProducts } = useContext(ProductContext)!;
+  const { setProducts, filters, setFilters } = useContext(ProductContext)!;
 
   const setProductList = () => {
     if (products) {
-      setProducts(products);
+      setProducts([...products]);
     }
-  };
-  const handleCategoryChange = (category: string) => {
-    setProducts(products.filter((product: Product) => product.category.startsWith(category)));
+    setFilters({ maxPrice: undefined, minPrice: undefined, selectedCategory: undefined });
   };
 
   const searchbyName = (name: string) => {
-    setProducts(products.filter((product: Product) => product.name.startsWith(name)));
+    setProducts((prevProducts: Product[]) =>
+      prevProducts.filter((product: Product) => product.name.startsWith(name))
+    );
   };
+
   useEffect(() => {
     setProductList();
   }, [products]);
 
-  return { products, isLoading, error, setProductList, handleCategoryChange, searchbyName };
+  useEffect(() => {
+    if (products) {
+      setProducts(
+        products.filter((product: Product) => {
+          if (filters.minPrice !== undefined && filters.maxPrice !== undefined) {
+            if (product.price < filters.minPrice || product.price > filters.maxPrice) return false;
+          }
+
+          if (filters.selectedCategory) {
+            if (product.category !== filters.selectedCategory) return false;
+          }
+
+          return true; // Include product if all conditions pass
+        })
+      );
+    }
+  }, [filters, products]);
+
+  return {
+    products,
+    isLoading,
+    error,
+    setProductList,
+    searchbyName,
+    filters,
+    setFilters
+  };
 };

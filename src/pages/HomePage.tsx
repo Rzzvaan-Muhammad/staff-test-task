@@ -5,7 +5,7 @@ import ProductList from '../components/ProductList';
 import { useProducts } from '../hooks/useProducts';
 
 const HomePage = () => {
-  const { isLoading, error, setProductList, handleCategoryChange, searchbyName } = useProducts();
+  const { isLoading, error, setProductList, searchbyName } = useProducts();
 
   if (isLoading) {
     return (
@@ -26,10 +26,7 @@ const HomePage = () => {
   return (
     <div className="bg-slate-100 flex flex-col md:flex-row gap-4 p-4">
       <div className="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-md ">
-        <FilterSidebar
-          setProductList={setProductList}
-          handleCategoryChange={handleCategoryChange}
-        />
+        <FilterSidebar setProductList={setProductList} />
       </div>
       <div className="flex-1">
         <SearchBar setProductList={setProductList} searchbyName={searchbyName} />
