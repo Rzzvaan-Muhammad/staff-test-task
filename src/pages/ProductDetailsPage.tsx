@@ -22,10 +22,14 @@ const fetchProductById = async (id: string | undefined): Promise<Product> => {
 };
 
 const ProductDetailsPage = () => {
-  const { id } = useParams(); 
-  const { data: product, isLoading, error }:any = useQuery<Product>({
-   queryKey: ['product', id],
-   queryFn:  () => fetchProductById(id)
+  const { id } = useParams();
+  const {
+    data: product,
+    isLoading,
+    error
+  } = useQuery<Product>({
+    queryKey: ['product', id],
+    queryFn: () => fetchProductById(id)
   });
 
   if (isLoading) {
@@ -34,9 +38,7 @@ const ProductDetailsPage = () => {
 
   if (error) {
     return (
-      <p className="text-center text-red-500">
-        Failed to load product details. Please try again.
-      </p>
+      <p className="text-center text-red-500">Failed to load product details. Please try again.</p>
     );
   }
 
@@ -51,12 +53,11 @@ const ProductDetailsPage = () => {
 
       <h1 className="text-2xl font-bold mb-2">{product?.name}</h1>
       <p className="text-gray-600 mb-4">{product?.category}</p>
-      <p className="text-green-600 text-xl mb-6">${product.price}</p>
+      <p className="text-green-600 text-xl mb-6">${product?.price}</p>
 
       <button
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        onClick={() => window.history.back()}
-      >
+        onClick={() => window.history.back()}>
         Go Back
       </button>
     </div>

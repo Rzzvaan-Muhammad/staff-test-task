@@ -1,12 +1,39 @@
 [
-  { "id": 1, "name": "Product A", "category": "Electronics", "price": 299 },
-  { "id": 2, "name": "Product B", "category": "Electronics", "price": 19 },
-  { "id": 3, "name": "Product C", "category": "Electronics", "price": 190 },
-  { "id": 4, "name": "Product D", "category": "Electronics", "price": 120 },
-  { "id": 5, "name": "Product E", "category": "Books", "price": 90 },
-  { "id": 6, "name": "Product F", "category": "Books", "price": 230 },
-  { "id": 7, "name": "Product G", "category": "Books", "price": 900 },
-  { "id": 8, "name": "Product H", "category": "Books", "price": 150 },
-  { "id": 9, "name": "Product I", "category": "Books", "price": 50 },
-  { "id": 10, "name": "Product J", "category": "Books", "price": 740 }
+  { "id": 1, "name": "fan", "category": "Electronics", "price": 299 },
+  { "id": 2, "name": "light bulb", "category": "Electronics", "price": 19 },
+  { "id": 3, "name": "tv", "category": "Electronics", "price": 190 },
+  { "id": 4, "name": "phone", "category": "Electronics", "price": 120 },
+  
+  { "id": 5, "name": "fiction", "category": "Books", "price": 90 },
+  { "id": 6, "name": "history", "category": "Books", "price": 230 },
+  { "id": 7, "name": "maths", "category": "Books", "price": 900 },
+  { "id": 8, "name": "physics", "category": "Books", "price": 150 },
+
+  { "id": 9, "name": "computers", "category": "Books", "price": 50 },
+  { "id": 10, "name": "biology", "category": "Books", "price": 740 },
+
+  { "id": 11, "name": "headphones", "category": "Electronics", "price": 120 },
+  { "id": 12, "name": "speaker", "category": "Electronics", "price": 220 },
+  { "id": 13, "name": "laptop", "category": "Electronics", "price": 899 },
+  { "id": 14, "name": "smartwatch", "category": "Electronics", "price": 450 },
+
+  { "id": 15, "name": "novel", "category": "Books", "price": 150 },
+  { "id": 16, "name": "cookbook", "category": "Books", "price": 30 },
+  { "id": 17, "name": "philosophy", "category": "Books", "price": 520 },
+  { "id": 18, "name": "art", "category": "Books", "price": 120 },
+
+  { "id": 19, "name": "table", "category": "Furniture", "price": 80 },
+  { "id": 20, "name": "chair", "category": "Furniture", "price": 45 },
+  { "id": 21, "name": "bookshelf", "category": "Furniture", "price": 150 },
+  { "id": 22, "name": "sofa", "category": "Furniture", "price": 350 },
+
+  { "id": 23, "name": "toaster", "category": "Home Appliances", "price": 40 },
+  { "id": 24, "name": "blender", "category": "Home Appliances", "price": 90 },
+  { "id": 25, "name": "vacuum cleaner", "category": "Home Appliances", "price": 120 },
+  { "id": 26, "name": "microwave", "category": "Home Appliances", "price": 180 },
+
+  { "id": 27, "name": "shoes", "category": "Footwear", "price": 60 },
+  { "id": 28, "name": "sandals", "category": "Footwear", "price": 30 },
+  { "id": 29, "name": "boots", "category": "Footwear", "price": 120 },
+  { "id": 30, "name": "sneakers", "category": "Footwear", "price": 150 }
 ]

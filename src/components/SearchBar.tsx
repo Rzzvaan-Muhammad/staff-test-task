@@ -1,19 +1,33 @@
-import React, { useState, useContext } from 'react';
-import { ProductContext } from '../context/ProductContext';
+import React, { useState, useContext, useEffect } from 'react';
+import { ProductContext, Product } from '../context/ProductContext';
 
 const SearchBar = () => {
-  const { products, setProducts } = useContext(ProductContext)!; 
-  const [searchTerm, setSearchTerm] = useState(''); 
+  const { setProducts } = useContext(ProductContext)!;
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedTerm(searchTerm); // Update debounced term after delay
+    }, 500); // Delay in milliseconds (500ms here)
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedTerm) {
+      setProducts((prevProducts: Product[]) =>
+        prevProducts.filter((product: Product) =>
+          product.name.toLowerCase().startsWith(debouncedTerm.toLowerCase())
+        )
+      );
+    }
+  }, [debouncedTerm, setProducts]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const term = event.target.value.toLowerCase();
-    setSearchTerm(term);
-
-    setProducts((prevProducts:any) =>
-      prevProducts.filter((product:any) =>
-        product.name.toLowerCase().includes(term)
-      )
-    );
+    setSearchTerm(event.target.value.toLowerCase());
   };
 
   return (
