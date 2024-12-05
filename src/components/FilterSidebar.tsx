@@ -1,15 +1,9 @@
-import React, { useContext } from 'react';
-import { ProductContext, Product } from '../context/ProductContext';
+import React from 'react';
 
-const FilterSidebar: React.FC<{ setProductList: () => void }> = ({ setProductList }) => {
-  const { setProducts } = useContext(ProductContext)!;
-
-  const handleCategoryChange = (category: string) => {
-    setProducts((prevProducts: Product[]) =>
-      prevProducts.filter((product: Product) => product.category.startsWith(category))
-    );
-  };
-
+const FilterSidebar: React.FC<{
+  handleCategoryChange: (category: string) => void;
+  setProductList: () => void;
+}> = ({ handleCategoryChange, setProductList }) => {
   const Button: React.FC<{ category: string }> = ({ category }) => (
     <button
       className="flex items-center justify-between bg-gray-100 hover:bg-gray-200 rounded-md px-4 py-2 text-gray-700 shadow-sm hover:shadow-md transition-all duration-200"

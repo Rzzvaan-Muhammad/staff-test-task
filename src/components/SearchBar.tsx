@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { ProductContext, Product } from '../context/ProductContext';
+import React, { useState, useEffect } from 'react';
 
-const SearchBar: React.FC<{ setProductList: () => void }> = ({ setProductList }) => {
-  const { setProducts } = useContext(ProductContext)!;
+const SearchBar: React.FC<{ setProductList: () => void; searchbyName: (name: string) => void }> = ({
+  setProductList,
+  searchbyName
+}) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState(searchTerm);
 
@@ -22,13 +23,9 @@ const SearchBar: React.FC<{ setProductList: () => void }> = ({ setProductList })
 
   useEffect(() => {
     if (debouncedTerm) {
-      setProducts((prevProducts: Product[]) =>
-        prevProducts.filter((product: Product) =>
-          product.name.toLowerCase().startsWith(debouncedTerm.toLowerCase())
-        )
-      );
+      searchbyName(debouncedTerm);
     }
-  }, [debouncedTerm, setProducts]);
+  }, [debouncedTerm]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value.toLowerCase());

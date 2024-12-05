@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -9,7 +10,7 @@ interface Product {
 
 const ProductCard = ({ product }: { product: Product }) => {
   const randomImageUrl = `https://picsum.photos/200/300?random=${product.id}`;
-
+  const navigate = useNavigate();
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-5 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300">
       <img
@@ -27,8 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
       <button
         className="mt-auto bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold py-2 px-6 rounded-full flex items-center gap-2 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300"
-        aria-label={`View details for ${product.name}`}
-        onClick={() => (window.location.href = `/product/${product.id}`)}>
+        onClick={() => navigate(`/product/${product.id}`)}>
         <span>View Details</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,19 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { ProductContext, Product } from '../context/ProductContext';
 
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-}
-
-const fetchProductById = async (id: string | undefined): Promise<Product> => {
-  const response = await axios.get(`/mockData.json`);
-  const products: Product[] = response.data;
-
+const productById = (id: string | undefined, products: Product[]) => {
   const product = products.find((p) => p.id === Number(id));
   if (!product) {
     throw new Error('Product not found');
@@ -23,25 +12,10 @@ const fetchProductById = async (id: string | undefined): Promise<Product> => {
 
 const ProductDetailsPage = () => {
   const { id } = useParams();
-  const {
-    data: product,
-    isLoading,
-    error
-  } = useQuery<Product>({
-    queryKey: ['product', id],
-    queryFn: () => fetchProductById(id)
-  });
 
-  if (isLoading) {
-    return <p className="text-center text-gray-500">Loading product details...</p>;
-  }
+  const { products } = useContext(ProductContext)!;
 
-  if (error) {
-    return (
-      <p className="text-center text-red-500">Failed to load product details. Please try again.</p>
-    );
-  }
-
+  const product: Product = productById(id, products);
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
       <img

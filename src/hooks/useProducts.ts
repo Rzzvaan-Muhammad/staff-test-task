@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { ProductContext } from '../context/ProductContext';
+import { ProductContext, Product } from '../context/ProductContext';
 
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -22,10 +22,16 @@ export const useProducts = () => {
       setProducts(products);
     }
   };
+  const handleCategoryChange = (category: string) => {
+    setProducts(products.filter((product: Product) => product.category.startsWith(category)));
+  };
 
+  const searchbyName = (name: string) => {
+    setProducts(products.filter((product: Product) => product.name.startsWith(name)));
+  };
   useEffect(() => {
     setProductList();
   }, [products]);
 
-  return { products, isLoading, error, setProductList };
+  return { products, isLoading, error, setProductList, handleCategoryChange, searchbyName };
 };
