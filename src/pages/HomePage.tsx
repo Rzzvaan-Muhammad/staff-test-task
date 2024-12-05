@@ -9,7 +9,7 @@ import {
 import axios from 'axios';
 
 const fetchProducts = async () => {
-  const response = await axios.get('/mockDvata.json'); 
+  const response = await axios.get('/mockData.json'); 
   return response.data;
 };
 
