@@ -25,10 +25,8 @@ const HomePage = () => {
 
   return (
     <div className="bg-slate-100 flex flex-col md:flex-row gap-4 p-4">
-      <div className="w-full md:w-1/4 bg-white p-4 rounded-lg shadow-md ">
-        <FilterSidebar setProductList={setProductList} />
-      </div>
-      <div className="flex-1">
+      <FilterSidebar setProductList={setProductList} />
+      <div className="flex-1 mt-[50px] md:mt-auto">
         <SearchBar setProductList={setProductList} searchbyName={searchbyName} />
         <ProductList />
       </div>
